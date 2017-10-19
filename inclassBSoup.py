@@ -1,48 +1,59 @@
+import requests
 from bs4 import BeautifulSoup
 
 #YOUR CODE 1
 # open the "samplehtml.html" file and read it into a string
 # No ouptput
-
-print("\n")
+f = open("samplehtml.html", "r")
+text_data_from_file = f.read()
+f.close()
 
 #YOUR CODE 2
 # create a BeautifulSoup object from the string
 # No output
-
-print("\n")
+soup = BeautifulSoup(text_data_from_file, "html.parser")
+print (soup.find_all("img"))
+imgs = soup.find_all("img")
+xkcd_img = imgs[0]
 
 #YOUR CODE 3
 # Write/plan code to print the URL to the XKCD comic, using BSoup and this file.
+print(xkcd_img["src"])
 
 print("\n")
 
 #YOUR CODE 4
 # Write code to grab all the links (URLs) in that html page, but nothing else.
-
+for lnk in soup.find_all('a'):
+	print(lnk['href'])
 
 print("\n")
 
 #YOUR CODE 5
 # Write/plan code to grab the TEXT of all the links in that html page, but nothing else.
-
+for lnk in soup.find_all('a'):
+	print(lnk.text)
 
 print("\n")
 #YOUR CODE 6
 # Write/plan code to grab the text of each of the items in the ordered list. (Not the 1/2/2, just the text. 
-
+list_objs = soup.find_all('li')
+for li in list_objs:
+	print(li.text)
 
 print("\n")
 #YOUR CODE 7
 # - Write/plan code to grab the alt text associated with the image of the XKCD comic.
 # see way above for accessing xkcd_img...
 # OUTPUT - 
+print(xkcd_img["aria-text"])
 
 print("\n")
 #YOUR CODE 7
 # Write  code to assign the BeautifulSoup object holding the div that contains the image to a variable `image_div_obj` 
 #Ouput: print image_div_obj
-
+image_div_obj = soup.find('div', {"id":"below-section"})
+print(image_div_obj)
 
 
 print("\n")
